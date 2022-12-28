@@ -56,6 +56,7 @@ def get_username(event=None) -> str:
     def validate(event):
         global username
         username = entry_user.get().strip() if entry_user.get().strip() != '' else username
+        
         root_user.destroy()
         return username
     def f(event):
@@ -166,6 +167,9 @@ def main() -> None:
             sleep(5)
         except RemoteDisconnected:#NETWERK
             sleep(5)
+        except TypeError:
+            username = get_username()
+        
         
 
 #USR WICH BE SCRAPPED
@@ -206,8 +210,10 @@ can_label.pack(side=LEFT)
 label_day_contr = Label(can_label, textvariable=var_day, font=('', 19), bg='#161b22', fg='black')
 can_label.create_window(15, 20, window=label_day_contr)
 
-im = PIL_ImageTk.PhotoImage(PIL_Image.open("C:/Users/ordi2110879/Pictures/Font_d'écran.jpg").resize((40, 40)))
-canvas.create_image(20, 20, image=im)
-
+try:
+    im = PIL_ImageTk.PhotoImage(PIL_Image.open("profil_bild.png").resize((40, 40)))
+    canvas.create_image(20, 20, image=im)
+except:
+    canvas.create_image(20, 20)
 Thread(target=main).start()
 root.mainloop()
