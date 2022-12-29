@@ -8,15 +8,6 @@ from PIL import Image as PIL_Image, ImageTk as PIL_ImageTk
 from threading import Thread
 from http.client import RemoteDisconnected
 
-#SHOW THE CONTRIBUTIONS ON THE CONSOLE
-def print_contributions(days: list) -> None:
-    days = days[-31:]
-    for x in range(7):
-        for y in range(4 if x > 2 else 5):
-            nbe = days[y*7+x]['data-count'] if int(days[y*7+x]['data-count']) <= 9 else 9
-            print(nbe, end='')
-        print()
-
 #SCRAPE THE CONTRIBUTIONS AND THE PROFILE BILD ON GITHUBE
 def get_contributions(username: str) -> dict:
     url = f"https://github.com/{username}/"
@@ -39,10 +30,6 @@ def get_contributions(username: str) -> dict:
     
 
     return {'year': last_year, 'month': last_month, 'day': today, 'profil_bild': profil_bild}
-
-#GET THE DATE OF TODAY
-def get_date() -> str:
-    return f"{strftime('%A')} {strftime('%d')} {strftime('%B')} {strftime('%Y')}"
 
 #DOWNLOAD A BILD
 def download_bild(url: str, chemin: str) -> None:
@@ -85,6 +72,7 @@ def get_username(event=None) -> str:
 
 #WENN THE USER MOVE THE WINDOW
 def deplacement(event=None) -> None:
+    print(event)
     try:
         x_souris, y_souris = root.winfo_pointerxy()
         x_root = root.winfo_width()
@@ -129,7 +117,6 @@ def fermer(event=None) -> None:
 
 #UPDATE THE ROOT WITH NEW INFOS
 def update_root(event=None) -> None:
-    var_date.set(get_date())
     n = get_contributions(username)
     if len(str(n['day']))<2:
         n['day']=' '+str(n['day'])
@@ -180,10 +167,7 @@ except FileNotFoundError:
     username = get_username()
 
 root = Tk()
-var_date = StringVar(value=get_date())
 var_day = StringVar(value=' 0')
-var_month = StringVar(value=' 0')
-var_year = StringVar(value=' 0')
 
 root.config(bg='#0d1117')
 root.geometry("80x40")
