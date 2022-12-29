@@ -44,7 +44,6 @@ def get_username(event=None) -> str:
         global username
         username = entry_user.get().strip() if entry_user.get().strip() != '' else username
         root_user.destroy()
-        print(1)
 
     def f(event):
         root_user.destroy()
@@ -59,16 +58,13 @@ def get_username(event=None) -> str:
     entry_user.focus_force()
     
     root_user.bind('<Control-Return>', validate)
-    entry_user.bind('<Control-Return>', validate)
     root_user.bind('<Escape>', f)
-    print(4)
     root_user.mainloop()
     
-    get_contributions(username)
     w = open('data.txt', 'w', encoding='UTF-8')
     w.write(username)
     w.close()
-
+    get_contributions(username)
     return username
 
 
