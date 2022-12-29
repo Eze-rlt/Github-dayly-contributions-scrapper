@@ -43,9 +43,9 @@ def get_username(event=None) -> str:
     def validate(event):
         global username
         username = entry_user.get().strip() if entry_user.get().strip() != '' else username
-        
         root_user.destroy()
-        return username
+        print(1)
+
     def f(event):
         root_user.destroy()
     
@@ -61,8 +61,10 @@ def get_username(event=None) -> str:
     root_user.bind('<Control-Return>', validate)
     entry_user.bind('<Control-Return>', validate)
     root_user.bind('<Escape>', f)
+    print(4)
     root_user.mainloop()
-
+    
+    get_contributions(username)
     w = open('data.txt', 'w', encoding='UTF-8')
     w.write(username)
     w.close()
@@ -72,7 +74,6 @@ def get_username(event=None) -> str:
 
 #WENN THE USER MOVE THE WINDOW
 def deplacement(event=None) -> None:
-    print(event)
     try:
         x_souris, y_souris = root.winfo_pointerxy()
         x_root = root.winfo_width()
