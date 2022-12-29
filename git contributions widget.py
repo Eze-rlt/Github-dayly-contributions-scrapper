@@ -119,13 +119,13 @@ def update_root(event=None) -> None:
         n['day']=' '+str(n['day'])
     var_day.set(n['day'])
 
-    if n['day'] == 0:
+    if int(n['day']) == 0:
         label_day_contr['bg'] = '#161b22'
-    elif n['day'] == 1:
+    elif int(n['day']) == 1:
         label_day_contr['bg'] = '#0e4429'
-    elif n['day'] == 2:
+    elif int(n['day']) == 2:
         label_day_contr['bg'] = '#006d32'
-    elif n['day'] == 3:
+    elif int(n['day']) == 3:
         label_day_contr['bg'] = '#26a641'
     else:
         label_day_contr['bg'] = '#39d353'
