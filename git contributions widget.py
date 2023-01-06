@@ -18,6 +18,8 @@ def get_contributions(username: str) -> dict:
     
     tableau = soup.find(name='svg', attrs={'class': 'js-calendar-graph-svg'}) #TABLEAU OF CONTRIBUTIONS
     days = tableau.find_all(name='rect', attrs={'class': 'ContributionCalendar-day'}) #DAYS OF THE YEAR
+    print(days[-1])
+    return
     today = int(days[-1]['data-count'])
 
     last_month = int()
